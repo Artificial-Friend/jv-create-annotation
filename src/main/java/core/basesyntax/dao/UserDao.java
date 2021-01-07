@@ -2,9 +2,10 @@ package core.basesyntax.dao;
 
 import core.basesyntax.model.Bet;
 import core.basesyntax.model.User;
+import java.util.List;
 
-public interface BetDao {
-    void addBet(Bet bet);
+public interface UserDao {
+    List<Bet> getBets();
 
-    void addUser(User user);
+    List<User> getUsers();
 }
