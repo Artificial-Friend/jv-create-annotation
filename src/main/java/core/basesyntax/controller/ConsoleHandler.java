@@ -23,10 +23,7 @@ public class ConsoleHandler {
                 dao.addBet(bet);
             } catch (NumberFormatException | ArrayIndexOutOfBoundsException exception) {
                 System.out.println("input is incorrect");
-            } finally {
-                scanner.close();
             }
         }
-
     }
 }
