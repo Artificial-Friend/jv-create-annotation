@@ -10,8 +10,8 @@ public class ConsoleHandler {
     BetDao dao = new BetDaoImpl();
 
     public void handle() {
-        String command = scanner.nextLine();
         while (true) {
+            String command = scanner.nextLine();
             if (command.equalsIgnoreCase("q")) {
                 return;
             }
