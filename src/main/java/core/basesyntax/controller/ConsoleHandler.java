@@ -11,23 +11,22 @@ public class ConsoleHandler {
 
     public void handle() {
         String command = scanner.nextLine();
-        int value;
-        double risk;
-        String[] betData;
-        Bet bet;
         while (true) {
             if (command.equalsIgnoreCase("q")) {
                 return;
             }
             try {
-                betData = command.split(" ");
-                value = Integer.parseInt(betData[0]);
-                risk = Double.parseDouble(betData[1]);
-                bet = new Bet(value, risk);
+                String[] betData = command.split(" ");
+                int value = Integer.parseInt(betData[0]);
+                double risk = Double.parseDouble(betData[1]);
+                Bet bet = new Bet(value, risk);
                 dao.addBet(bet);
             } catch (NumberFormatException | ArrayIndexOutOfBoundsException exception) {
                 System.out.println("input is incorrect");
+            } finally {
+                scanner.close();
             }
         }
+
     }
 }
