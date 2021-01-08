@@ -26,4 +26,10 @@ public class Bet {
         this.risk = risk;
         return this;
     }
+
+    @Override
+    public String toString() {
+        return "Bet{" + "value=" + value
+                + ", risk=" + risk + '}';
+    }
 }
