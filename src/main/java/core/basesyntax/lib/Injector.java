@@ -1,9 +1,7 @@
 package core.basesyntax.lib;
 
 import core.basesyntax.dao.BetDao;
-import core.basesyntax.dao.BetDaoImpl;
 import core.basesyntax.dao.UserDao;
-import core.basesyntax.dao.UserDaoImpl;
 import core.basesyntax.exceptions.AnnotationException;
 import core.basesyntax.factory.Factory;
 import java.lang.reflect.Constructor;
@@ -32,8 +30,8 @@ public class Injector {
     }
 
     private static void validate() {
-        if (BetDaoImpl.class.isAnnotationPresent(Dao.class)
-                && UserDaoImpl.class.isAnnotationPresent(Dao.class)) {
+        if (Factory.getBetDao().getClass().isAnnotationPresent(Dao.class)
+                && Factory.getUserDao().getClass().isAnnotationPresent(Dao.class)) {
             return;
         }
         throw new AnnotationException("THIS IS STILL IN BETA, "
