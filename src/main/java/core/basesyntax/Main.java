@@ -10,5 +10,4 @@ public class Main {
         ConsoleHandler handler = (ConsoleHandler) Injector.getInstance(ConsoleHandler.class);
         handler.handle();
     }
-
 }
