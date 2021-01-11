@@ -1,7 +1,9 @@
 package core.basesyntax.lib;
 
 import core.basesyntax.dao.BetDao;
+import core.basesyntax.dao.BetDaoImpl;
 import core.basesyntax.dao.UserDao;
+import core.basesyntax.dao.UserDaoImpl;
 import core.basesyntax.exceptions.AnnotationException;
 import core.basesyntax.factory.Factory;
 import java.lang.reflect.Constructor;
@@ -9,9 +11,9 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 
 public class Injector {
-    public static Object getInstance(Class clazz) throws NoSuchMethodException,
+    public static Object getInstance(Class<?> clazz) throws NoSuchMethodException,
             IllegalAccessException, InvocationTargetException, InstantiationException {
-        Constructor constructor = clazz.getDeclaredConstructor();
+        Constructor<?> constructor = clazz.getDeclaredConstructor();
         Object instance = constructor.newInstance();
 
         Field[] declaredFields = clazz.getDeclaredFields();
@@ -30,11 +32,11 @@ public class Injector {
     }
 
     private static void validate() {
-        if (Factory.getBetDao().getClass().isAnnotationPresent(Dao.class)
-                && Factory.getUserDao().getClass().isAnnotationPresent(Dao.class)) {
-            return;
+        if (!Factory.getBetDao().getClass().isAnnotationPresent(Dao.class)) {
+            throw new AnnotationException("@Dao annotation is missing in " + BetDaoImpl.class);
         }
-        throw new AnnotationException("THIS IS STILL IN BETA, "
-                + "CONTACT CEO FOR FURTHER INFORMATION ");
+        if (!Factory.getUserDao().getClass().isAnnotationPresent(Dao.class)) {
+            throw new AnnotationException("@Dao annotation is missing in " + UserDaoImpl.class);
+        }
     }
 }
